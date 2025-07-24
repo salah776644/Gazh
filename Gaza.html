@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تضامن مع أهل غزة - تصميم فاخر</title>
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Changa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e5128;
+            --secondary: #4f772d;
+            --accent: #c00;
+            --gold: #d4af37;
+            --light: #f8fff8;
+            --dark: #132a13;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c1e0c 0%, #1a3c1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            font-family: 'Changa', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(30, 81, 40, 0.1)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .header {
+            text-align: center;
+            margin: 20px 0 40px;
+            width: 100%;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .header h1 {
+            font-family: 'El Messiri', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .header p {
+            font-size: 1.4rem;
+            color: #e0f0e0;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        .palestine-symbol {
+            margin: 25px auto;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #000 25%, #fff 25%, #fff 50%, #006400 50%, #006400 75%, #c00 75%);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1400px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+        
+        .design-container {
+            flex: 1;
+            min-width: 600px;
+            background: rgba(19, 42, 19, 0.8);
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 750px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+        }
+        
+        .design-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(212, 175, 55, 0.05)" stroke-width="1"/></svg>');
+            z-index: 0;
+        }
+        
+        .design {
+            flex: 1;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .design-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+        
+        .design-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
+            z-index: 1;
+        }
+        
+        .user-image-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 10px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 0 5px var(--gold);
+            margin: 30px 0;
+            z-index: 2;
+            transition: all 0.5s ease;
+        }
+        
+        .user-image-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7), 0 0 0 5px var(--gold);
+        }
+        
+        #user-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2c5e2c 0%, #1a3c1a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #e0e0e0;
+            font-size: 1.4rem;
+            text-align: center;
+            padding: 20px;
+            font-weight: 300;
+        }
+        
+        .solidarity-text {
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.9) 100%);
+            color: #fff;
+            font-family: 'El Messiri', serif;
+            font-size: 3rem;
+            padding: 20px 60px;
+            border-radius: 60px;
+            margin-top: 30px;
+            text-align: center;
+            font-weight: bold;
+            max-width: 90%;
+            z-index: 2;
+            border: 2px solid var(--gold);
+            text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .solidarity-text::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 10px;
+            background: var(--gold);
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+        }
+        
+        .controls {
+            background: rgba(19, 42, 19, 0.95);
+            padding: 30px;
+            border-top: 2px solid rgba(212, 175, 55, 0.2);
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+        }
+        
+        .controls-container {
+            flex: 1;
+            min-width: 450px;
+            background: rgba(19, 42, 19, 0.8);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            height: 750px;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+        }
+        
+        .controls-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="rgba(212, 175, 55, 0.05)" stroke-width="1"/></svg>');
+            z-index: 0;
+        }
+        
+        .controls-container h2 {
+            color: var(--gold);
+            margin-bottom: 35px;
+            text-align: center;
+            font-size: 2.2rem;
+            font-family: 'El Messiri', serif;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .controls-container h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        
+        .control-group {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: var(--gold);
+            font-size: 1.3rem;
+        }
+        
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px;
+            border: 3px dashed var(--gold);
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .file-upload:hover {
+            background: rgba(0, 0, 0, 0.4);
+            border-color: #e8c55c;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .file-upload i {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        .file-upload div {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            text-align: center;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--gold);
+            border-radius: 15px;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-top: 10px;
+            color: white;
+            font-family: 'El Messiri', serif;
+            transition: all 0.3s;
+        }
+        
+        .text-input:focus {
+            outline: none;
+            border-color: #e8c55c;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Changa', sans-serif;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn.download {
+            background: linear-gradient(135deg, #a00 0%, #c00 100%);
+            font-size: 1.5rem;
+            padding: 22px;
+        }
+        
+        .btn.download:hover {
+            background: linear-gradient(135deg, #c00 0%, #e00 100%);
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .instructions h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .instructions ul {
+            list-style: none;
+            padding-right: 15px;
+        }
+        
+        .instructions li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.2rem;
+            position: relative;
+            padding-right: 35px;
+        }
+        
+        .instructions li:last-child {
+            border-bottom: none;
+        }
+        
+        .instructions li::before {
+            content: "•";
+            color: var(--gold);
+            position: absolute;
+            right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #aaa;
+            font-size: 1.1rem;
+            padding: 25px;
+            max-width: 900px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        canvas {
+            display: none;
+        }
+        
+        .bg-preview {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            margin-top: 15px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--gold);
+            display: none;
+        }
+        
+        @media (max-width: 1100px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .design-container, .controls-container {
+                min-width: 90%;
+                max-width: 700px;
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .design-container, .controls-container {
+                height: auto;
+            }
+            
+            .user-image-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .solidarity-text {
+                font-size: 2.2rem;
+                padding: 15px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>تضامن مع أهل غزة</h1>
+        <p>أضف صورتك واختر خلفية مخصصة واكتب رسالة تضامنية مع أهل غزة واحفظ التصميم الفاخر على جهازك</p>
+        
+        <div class="palestine-symbol"></div>
+    </div>
+    
+    <div class="container">
+        <div class="design-container">
+            <div class="design" id="design">
+                <div class="design-bg" id="design-bg"></div>
+                <div class="design-overlay"></div>
+                <div class="user-image-container">
+                    <img id="user-image" alt="صورة المستخدم">
+                    <div class="placeholder-image" id="placeholder-image">
+                        <div>اضغط لتحميل صورتك</div>
+                    </div>
+                </div>
+                <div class="solidarity-text" id="solidarity-text">غزة.. صمود وشموخ</div>
+            </div>
+            <div class="controls">
+                <button class="btn download" id="download-btn">
+                    <i class="fas fa-download"></i> حفظ التصميم
+                </button>
+            </div>
+        </div>
+        
+        <div class="controls-container">
+            <h2>تخصيص التصميم</h2>
+            
+            <div class="control-group">
+                <label>تحميل صورتك الشخصية</label>
+                <div class="file-upload" id="upload-area">
+                    <i class="fas fa-user-circle"></i>
+                    <div>انقر لاختيار صورتك الشخصية</div>
+                    <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label>تحميل الخلفية المخصصة (1:1)</label>
+                <div class="file-upload" id="bg-upload-area">
+                    <i class="fas fa-image"></i>
+                    <div>انقر لاختيار خلفية التصميم</div>
+                    <input type="file" id="bg-upload" accept="image/*" style="display: none;">
+                </div>
+                <div class="bg-preview" id="bg-preview"></div>
+            </div>
+            
+            <div class="control-group">
+                <label>رسالة التضامن</label>
+                <input type="text" class="text-input" id="text-input" placeholder="اكتب رسالة التضامن هنا" value="غزة.. صمود وشموخ">
+            </div>
+            
+            <button class="btn" id="update-btn">
+                <i class="fas fa-sync-alt"></i> تحديث التصميم
+            </button>
+            
+            <div class="instructions">
+                <h3>تعليمات الاستخدام</h3>
+                <ul>
+                    <li>انقر على منطقة تحميل الصورة لاختيار صورتك الشخصية</li>
+                    <li>انقر على منطقة تحميل الخلفية لاختيار خلفية مخصصة</li>
+                    <li>اكتب رسالتك التضامنية في حقل النص</li>
+                    <li>انقر على "تحديث التصميم" لمعاينة التغييرات</li>
+                    <li>انقر على "حفظ التصميم" لتنزيله على جهازك</li>
+                    <li>شارك التصميم على وسائل التواصل الاجتماعي لدعم القضية الفلسطينية</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>هذا التصميم هو تعبير عن التضامن مع الشعب الفلسطيني في غزة. شاركنا التضامن وانشر التصميم لدعم القضية الفلسطينية. #غزة_تنتصر</p>
+        <p>صلاح احمدين</p>
+    </div>
+    
+    <canvas id="canvas"></canvas>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageUpload = document.getElementById('image-upload');
+            const uploadArea = document.getElementById('upload-area');
+            const bgUpload = document.getElementById('bg-upload');
+            const bgUploadArea = document.getElementById('bg-upload-area');
+            const bgPreview = document.getElementById('bg-preview');
+            const designBg = document.getElementById('design-bg');
+            const userImage = document.getElementById('user-image');
+            const placeholderImage = document.getElementById('placeholder-image');
+            const textInput = document.getElementById('text-input');
+            const solidarityText = document.getElementById('solidarity-text');
+            const updateBtn = document.getElementById('update-btn');
+            const downloadBtn = document.getElementById('download-btn');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // تحميل الصورة الشخصية
+            uploadArea.addEventListener('click', () => imageUpload.click());
+            
+            imageUpload.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    handleImageUpload(e.target.files[0], userImage, placeholderImage);
+                }
+            });
+            
+            // تحميل خلفية التصميم
+            bgUploadArea.addEventListener('click', () => bgUpload.click());
+            
+            bgUpload.addEventListener('change', (e) => {
+                if (e.target.files.length) {
+                    handleImageUpload(e.target.files[0], designBg, bgPreview);
+                    bgPreview.style.display = 'block';
+                }
+            });
+            
+            function handleImageUpload(file, targetElement, placeholder) {
+                if (!file.type.match('image.*')) {
+                    alert('الرجاء اختيار ملف صورة فقط');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    targetElement.style.backgroundImage = `url(${e.target.result})`;
+                    if (targetElement === designBg) {
+                        designBg.style.display = 'block';
+                    } else {
+                        targetElement.src = e.target.result;
+                        targetElement.style.display = 'block';
+                        if (placeholder) placeholder.style.display = 'none';
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+            
+            // تحديث نص التضامن
+            textInput.addEventListener('input', () => {
+                solidarityText.textContent = textInput.value || 'غزة.. صمود وشموخ';
+            });
+            
+            updateBtn.addEventListener('click', () => {
+                solidarityText.textContent = textInput.value || 'غزة.. صمود وشموخ';
+            });
+            
+            // حفظ التصميم كصورة
+            downloadBtn.addEventListener('click', function() {
+                // تعيين حجم canvas ليتناسب مع التصميم بدقة عالية
+                const designElement = document.getElementById('design');
+                const width = designElement.offsetWidth;
+                const height = designElement.offsetHeight;
+                
+                // ضبط دقة عالية للصورة المحفوظة
+                const scale = 2; // زيادة الدقة
+                canvas.width = width * scale;
+                canvas.height = height * scale;
+                
+                // تطبيق عامل التحجيم
+                ctx.scale(scale, scale);
+                
+                // رسم خلفية التصميم
+                if (designBg.style.backgroundImage) {
+                    const bgImg = new Image();
+                    bgImg.crossOrigin = "Anonymous";
+                    bgImg.src = designBg.style.backgroundImage.replace('url("', '').replace('")', '');
+                    
+                    // انتظار تحميل الصورة
+                    bgImg.onload = function() {
+                        ctx.drawImage(bgImg, 0, 0, width, height);
+                        drawDesignElements(width, height);
+                    };
+                } else {
+                    // إذا لم توجد خلفية، استخدم خلفية افتراضية
+                    ctx.fillStyle = '#132a13';
+                    ctx.fillRect(0, 0, width, height);
+                    drawDesignElements(width, height);
+                }
+            });
+            
+            function drawDesignElements(width, height) {
+                // رسم طبقة شفافة فوق الخلفية
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.fillRect(0, 0, width, height);
+                
+                // إضافة تأثيرات زخرفية
+                ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
+                for (let i = 0; i < 50; i++) {
+                    const x = Math.random() * width;
+                    const y = Math.random() * height;
+                    const radius = Math.random() * 5 + 1;
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                // إضافة صورة المستخدم إذا كانت موجودة
+                if (userImage.style.display === 'block') {
+                    const img = new Image();
+                    img.crossOrigin = "Anonymous";
+                    img.src = userImage.src;
+                    
+                    // انتظار تحميل الصورة
+                    img.onload = function() {
+                        const imgSize = Math.min(width * 0.4, height * 0.4);
+                        const centerX = width / 2;
+                        const centerY = height / 2 - 40;
+                        
+                        // حفظ حالة canvas الحالية
+                        ctx.save();
+                        
+                        // إنشاء شكل دائري للصورة
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, imgSize/2, 0, Math.PI * 2);
+                        ctx.closePath();
+                        ctx.clip();
+                        
+                        ctx.drawImage(
+                            img, 
+                            centerX - imgSize/2, 
+                            centerY - imgSize/2, 
+                            imgSize, 
+                            imgSize
+                        );
+                        
+                        // استعادة حالة canvas
+                        ctx.restore();
+                        
+                        // إضافة حدود بيضاء وذهبية
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, imgSize/2, 0, Math.PI * 2);
+                        ctx.lineWidth = 10;
+                        ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+                        ctx.stroke();
+                        
+                        ctx.beginPath();
+                        ctx.arc(centerX, centerY, imgSize/2 + 5, 0, Math.PI * 2);
+                        ctx.lineWidth = 3;
+                        ctx.strokeStyle = '#d4af37';
+                        ctx.stroke();
+                        
+                        drawText(width, height);
+                    };
+                } else {
+                    drawText(width, height);
+                }
+            }
+            
+            function drawText(width, height) {
+                // إضافة نص التضامن
+                const text = solidarityText.textContent || 'غزة.. صمود وشموخ';
+                ctx.font = 'bold 60px "El Messiri", serif';
+                ctx.fillStyle = 'white';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // إضافة ظل للنص
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+                ctx.shadowBlur = 8;
+                ctx.shadowOffsetX = 3;
+                ctx.shadowOffsetY = 3;
+                
+                // قياس النص للتأكد من أنه يناسب العرض
+                const textWidth = ctx.measureText(text).width;
+                const maxWidth = width * 0.9;
+                let fontSize = 60;
+                
+                if (textWidth > maxWidth) {
+                    fontSize = 60 * (maxWidth / textWidth);
+                    ctx.font = `bold ${fontSize}px "El Messiri", serif`;
+                }
+                
+                // وضع النص
+                ctx.fillText(text, width / 2, height - height * 0.2);
+                
+                // إضافة خط ذهبي فوق النص
+                ctx.shadowBlur = 0; // إزالة الظل عن الخط
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                ctx.fillStyle = '#d4af37';
+                ctx.fillRect(width/2 - 70, height - height * 0.2 - 50, 140, 5);
+                
+                // إضافة شعار فلسطيني صغير
+                ctx.fillStyle = '#000';
+                ctx.fillRect(width - 120, 40, 20, 80);
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(width - 100, 40, 20, 80);
+                ctx.fillStyle = '#006400';
+                ctx.fillRect(width - 80, 40, 20, 80);
+                ctx.fillStyle = '#c00';
+                ctx.beginPath();
+                ctx.moveTo(width - 120, 40);
+                ctx.lineTo(width - 120, 120);
+                ctx.lineTo(width - 60, 80);
+                ctx.closePath();
+                ctx.fill();
+                
+                // تحويل canvas إلى صورة للتنزيل
+                setTimeout(() => {
+                    const link = document.createElement('a');
+                    link.download = 'تضامن_مع_غزة.png';
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                }, 100);
+            }
+            
+            // تعيين خلفية افتراضية جميلة
+            designBg.style.backgroundImage = 'url(gazh.png)';
+            designBg.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
