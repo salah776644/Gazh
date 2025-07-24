@@ -531,12 +531,59 @@
                 padding: 15px 30px;
             }
         }
+        
+        /* تصميم العلم الفلسطيني */
+        .palestine-flag {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 100px;
+            height: 70px;
+            z-index: 10;
+        }
+        
+        .flag-black {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background-color: #000;
+        }
+        
+        .flag-white {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background-color: #fff;
+        }
+        
+        .flag-green {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 25%;
+            background-color: #006400;
+        }
+        
+        .flag-red {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 35%;
+            height: 100%;
+            background-color: #c00;
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>تضامن مع أهل غزة</h1>
-        <p>أضف صورتك واختر خلفية مخصصة واكتب رسالة تضامنية مع أهل غزة واحفظ التصميم الفاخر على جهازك</p>
+        <p>أضف صورتك واختر خلفية مخصصة واكتب رسالة تضامنية مع أهل غزة واحفظ التصميم الفاخر بحجم 1942×1648 بكسل</p>
         
         <div class="palestine-symbol"></div>
     </div>
@@ -544,6 +591,14 @@
     <div class="container">
         <div class="design-container">
             <div class="design" id="design">
+                <!-- العلم الفلسطيني -->
+                <div class="palestine-flag">
+                    <div class="flag-black"></div>
+                    <div class="flag-white"></div>
+                    <div class="flag-green"></div>
+                    <div class="flag-red"></div>
+                </div>
+                
                 <div class="design-bg" id="design-bg"></div>
                 <div class="design-overlay"></div>
                 <div class="user-image-container">
@@ -556,7 +611,7 @@
             </div>
             <div class="controls">
                 <button class="btn download" id="download-btn">
-                    <i class="fas fa-download"></i> حفظ التصميم
+                    <i class="fas fa-download"></i> حفظ التصميم (1942×1648)
                 </button>
             </div>
         </div>
@@ -574,7 +629,7 @@
             </div>
             
             <div class="control-group">
-                <label>تحميل الخلفية المخصصة (1:1)</label>
+                <label>تحميل الخلفية المخصصة</label>
                 <div class="file-upload" id="bg-upload-area">
                     <i class="fas fa-image"></i>
                     <div>انقر لاختيار خلفية التصميم</div>
@@ -599,7 +654,7 @@
                     <li>انقر على منطقة تحميل الخلفية لاختيار خلفية مخصصة</li>
                     <li>اكتب رسالتك التضامنية في حقل النص</li>
                     <li>انقر على "تحديث التصميم" لمعاينة التغييرات</li>
-                    <li>انقر على "حفظ التصميم" لتنزيله على جهازك</li>
+                    <li>انقر على "حفظ التصميم" لتنزيله على جهازك بحجم 1942×1648 بكسل</li>
                     <li>شارك التصميم على وسائل التواصل الاجتماعي لدعم القضية الفلسطينية</li>
                 </ul>
             </div>
@@ -678,20 +733,16 @@
                 solidarityText.textContent = textInput.value || 'غزة.. صمود وشموخ';
             });
             
-            // حفظ التصميم كصورة
+            // حفظ التصميم كصورة بحجم 1942×1648 بكسل
             downloadBtn.addEventListener('click', function() {
-                // تعيين حجم canvas ليتناسب مع التصميم بدقة عالية
-                const designElement = document.getElementById('design');
-                const width = designElement.offsetWidth;
-                const height = designElement.offsetHeight;
+                // تعيين حجم ثابت للـ canvas
+                const width = 1648;
+                const height = 1942;
+                canvas.width = width;
+                canvas.height = height;
                 
-                // ضبط دقة عالية للصورة المحفوظة
-                const scale = 2; // زيادة الدقة
-                canvas.width = width * scale;
-                canvas.height = height * scale;
-                
-                // تطبيق عامل التحجيم
-                ctx.scale(scale, scale);
+                // إعادة ضبط context
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
                 
                 // رسم خلفية التصميم
                 if (designBg.style.backgroundImage) {
@@ -699,8 +750,8 @@
                     bgImg.crossOrigin = "Anonymous";
                     bgImg.src = designBg.style.backgroundImage.replace('url("', '').replace('")', '');
                     
-                    // انتظار تحميل الصورة
                     bgImg.onload = function() {
+                        // رسم الخلفية لتملأ كامل الـ canvas مع الحفاظ على النسبة
                         ctx.drawImage(bgImg, 0, 0, width, height);
                         drawDesignElements(width, height);
                     };
@@ -719,10 +770,10 @@
                 
                 // إضافة تأثيرات زخرفية
                 ctx.fillStyle = 'rgba(212, 175, 55, 0.1)';
-                for (let i = 0; i < 50; i++) {
+                for (let i = 0; i < 100; i++) {
                     const x = Math.random() * width;
                     const y = Math.random() * height;
-                    const radius = Math.random() * 5 + 1;
+                    const radius = Math.random() * 7 + 1;
                     ctx.beginPath();
                     ctx.arc(x, y, radius, 0, Math.PI * 2);
                     ctx.fill();
@@ -734,16 +785,12 @@
                     img.crossOrigin = "Anonymous";
                     img.src = userImage.src;
                     
-                    // انتظار تحميل الصورة
                     img.onload = function() {
-                        const imgSize = Math.min(width * 0.4, height * 0.4);
+                        const imgSize = 600; // حجم الصورة في التصميم النهائي
                         const centerX = width / 2;
-                        const centerY = height / 2 - 40;
+                        const centerY = height / 2 - 120; // رفع الصورة قليلاً لأعلى
                         
-                        // حفظ حالة canvas الحالية
                         ctx.save();
-                        
-                        // إنشاء شكل دائري للصورة
                         ctx.beginPath();
                         ctx.arc(centerX, centerY, imgSize/2, 0, Math.PI * 2);
                         ctx.closePath();
@@ -757,7 +804,6 @@
                             imgSize
                         );
                         
-                        // استعادة حالة canvas
                         ctx.restore();
                         
                         // إضافة حدود بيضاء وذهبية
@@ -768,8 +814,8 @@
                         ctx.stroke();
                         
                         ctx.beginPath();
-                        ctx.arc(centerX, centerY, imgSize/2 + 5, 0, Math.PI * 2);
-                        ctx.lineWidth = 3;
+                        ctx.arc(centerX, centerY, imgSize/2 + 10, 0, Math.PI * 2);
+                        ctx.lineWidth = 8;
                         ctx.strokeStyle = '#d4af37';
                         ctx.stroke();
                         
@@ -783,49 +829,54 @@
             function drawText(width, height) {
                 // إضافة نص التضامن
                 const text = solidarityText.textContent || 'غزة.. صمود وشموخ';
-                ctx.font = 'bold 60px "El Messiri", serif';
+                ctx.font = 'bold 120px "El Messiri", serif';
                 ctx.fillStyle = 'white';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
                 
                 // إضافة ظل للنص
                 ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
-                ctx.shadowBlur = 8;
-                ctx.shadowOffsetX = 3;
-                ctx.shadowOffsetY = 3;
+                ctx.shadowBlur = 10;
+                ctx.shadowOffsetX = 5;
+                ctx.shadowOffsetY = 5;
                 
                 // قياس النص للتأكد من أنه يناسب العرض
                 const textWidth = ctx.measureText(text).width;
                 const maxWidth = width * 0.9;
-                let fontSize = 60;
+                let fontSize = 120;
                 
                 if (textWidth > maxWidth) {
-                    fontSize = 60 * (maxWidth / textWidth);
+                    fontSize = 120 * (maxWidth / textWidth);
                     ctx.font = `bold ${fontSize}px "El Messiri", serif`;
                 }
                 
-                // وضع النص
-                ctx.fillText(text, width / 2, height - height * 0.2);
+                // وضع النص في الجزء السفلي مع تباعد مناسب
+                ctx.fillText(text, width / 2, height - 250);
                 
                 // إضافة خط ذهبي فوق النص
-                ctx.shadowBlur = 0; // إزالة الظل عن الخط
+                ctx.shadowBlur = 0;
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
                 ctx.fillStyle = '#d4af37';
-                ctx.fillRect(width/2 - 70, height - height * 0.2 - 50, 140, 5);
+                ctx.fillRect(width/2 - 120, height - 300, 240, 10);
                 
-                // إضافة شعار فلسطيني صغير
+                // إضافة شعار فلسطيني صغير في الزاوية
+                const flagWidth = 150;
+                const flagHeight = 100;
+                const flagX = width - flagWidth - 80;
+                const flagY = 80;
+                
                 ctx.fillStyle = '#000';
-                ctx.fillRect(width - 120, 40, 20, 80);
+                ctx.fillRect(flagX, flagY, flagWidth/4, flagHeight);
                 ctx.fillStyle = '#fff';
-                ctx.fillRect(width - 100, 40, 20, 80);
+                ctx.fillRect(flagX + flagWidth/4, flagY, flagWidth/4, flagHeight);
                 ctx.fillStyle = '#006400';
-                ctx.fillRect(width - 80, 40, 20, 80);
+                ctx.fillRect(flagX + 2*flagWidth/4, flagY, flagWidth/4, flagHeight);
                 ctx.fillStyle = '#c00';
                 ctx.beginPath();
-                ctx.moveTo(width - 120, 40);
-                ctx.lineTo(width - 120, 120);
-                ctx.lineTo(width - 60, 80);
+                ctx.moveTo(flagX, flagY);
+                ctx.lineTo(flagX, flagY + flagHeight);
+                ctx.lineTo(flagX + flagWidth/2, flagY + flagHeight/2);
                 ctx.closePath();
                 ctx.fill();
                 
@@ -833,13 +884,13 @@
                 setTimeout(() => {
                     const link = document.createElement('a');
                     link.download = 'تضامن_مع_غزة.png';
-                    link.href = canvas.toDataURL('image/png');
+                    link.href = canvas.toDataURL('gazh.png');
                     link.click();
                 }, 100);
             }
             
             // تعيين خلفية افتراضية جميلة
-            designBg.style.backgroundImage = 'url(gazh.png)';
+            designBg.style.backgroundImage = 'url("gazh.png")';
             designBg.style.display = 'block';
         });
     </script>
